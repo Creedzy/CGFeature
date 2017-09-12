@@ -1,0 +1,72 @@
+22:36:50.609 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 7336 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+22:36:50.656 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+22:36:50.657 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+22:37:32.482 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+22:37:32.483 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+22:37:41.695 INFO  o.s.boot.StartupInfoLogger.logStarted 57 -- Started CGfeatureApplication in 53.365 seconds (JVM running for 61.109)
+22:43:25.284 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 6516 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+22:43:25.286 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+22:43:25.287 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+22:44:03.011 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+22:44:03.012 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+22:45:08.308 DEBUG org.cg.rest.MainController.registration 41 -- Reg user:Reg DTO:[firstName:nas ,lastName:nas ,email:test123@abv.bg ,username:nas ,passwordpassword ,g_recaptcha_response:null]
+22:45:08.773 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 89 -- ResponseBody:{
+  "success": false,
+  "error-codes": [
+    "missing-input-response"
+  ]
+}
+22:45:08.794 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 99 -- StatusCode:200,Message:200,{"error-codes":["missing-input-response"],"success":false},{}
+22:46:02.355 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 7996 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+22:46:02.358 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+22:46:02.360 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+22:46:46.738 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+22:46:46.739 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+22:55:06.404 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 8212 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+22:55:06.407 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+22:55:06.408 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+22:55:43.461 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+22:55:43.462 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+22:57:04.386 DEBUG org.cg.rest.MainController.registration 41 -- Reg user:Reg DTO:[firstName:nas ,lastName:nas ,email:test123@abv.bg ,username:nas ,passwordpassword ,g_recaptcha_response:null]
+22:57:04.622 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 89 -- ResponseBody:{
+  "success": false,
+  "error-codes": [
+    "missing-input-response"
+  ]
+}
+22:57:04.623 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 99 -- StatusCode:200,Message:200,{"error-codes":["missing-input-response"],"success":false},{}
+23:02:11.184 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 8328 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+23:02:11.187 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+23:02:11.188 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+23:02:50.022 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+23:02:50.023 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+23:02:59.701 INFO  o.s.boot.StartupInfoLogger.logStarted 57 -- Started CGfeatureApplication in 50.027 seconds (JVM running for 53.776)
+23:05:56.264 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 8776 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+23:05:56.266 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+23:05:56.267 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+23:06:34.973 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+23:06:34.974 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+23:06:45.566 INFO  o.s.boot.StartupInfoLogger.logStarted 57 -- Started CGfeatureApplication in 50.733 seconds (JVM running for 54.235)
+23:08:22.050 DEBUG org.cg.rest.MainController.registration 42 -- Reg user:Reg DTO:[firstName:nas ,lastName:nas ,email:test123@abv.bg ,username:nas ,passwordpassword ,g_recaptcha_response:null],recaptha: 03AEHxwuyaTIVeWlaj7tAnwd0L9vQBxadtPGXRhbT7GD33uybIy8rfbG-5y_M48IYgUKM6cx2WaVvjiIL-zD0jpBQxPn_JjJHSobvzdlfgHd7RpPoPU5cDMwbhd7Os7q1vcdQieTY40QSKRth_SqAosA9RRLBuxKjygGk09WxYaTBXjIGUgEBCZxRKJRej6HkO9xExujev-Eua4M8wdsDXOs4V2mL7YC2PuA1otWMdUqvW3Kk_H0u47tsno9NKhhiFO-bCbT2Ur7UH_GD6W04pQB8yz1_m-1httTKFtqS9tKNGUF_pmx5wSe0
+23:08:22.480 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 89 -- ResponseBody:{
+  "success": true,
+  "challenge_ts": "2017-06-24T22:07:59Z",
+  "hostname": "stest.com"
+}
+23:08:22.500 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 99 -- StatusCode:200,Message:200,{"hostname":"stest.com","success":true,"challenge_ts":"2017-06-24T22:07:59Z"},{}
+23:09:32.224 INFO  o.s.boot.StartupInfoLogger.logStarting 48 -- Starting CGfeatureApplication on nas-PC with PID 3936 (D:\Spring\Workspace\CGfeature\bin started by nas in D:\Spring\Workspace\CGfeature)
+23:09:32.226 DEBUG o.s.boot.StartupInfoLogger.logStarting 51 -- Running with Spring Boot v1.5.4.BUILD-SNAPSHOT, Spring v4.3.9.RELEASE
+23:09:32.227 INFO  o.s.boot.SpringApplication.logStartupProfileInfo 597 -- The following profiles are active: prod,web
+23:10:11.457 DEBUG o.s.web.filter.GenericFilterBean.init 208 -- Initializing filter 'getAuthTokenFilter'
+23:10:11.458 DEBUG o.s.web.filter.GenericFilterBean.init 239 -- Filter 'getAuthTokenFilter' configured successfully
+23:10:22.063 INFO  o.s.boot.StartupInfoLogger.logStarted 57 -- Started CGfeatureApplication in 51.473 seconds (JVM running for 54.999)
+23:10:52.180 DEBUG org.cg.rest.MainController.registration 42 -- Reg user:Reg DTO:[firstName:nas ,lastName:nas ,email:test123@abv.bg ,username:nas ,passwordpassword ,g_recaptcha_response:null],recaptha: 03AEHxwuy5gFmzG1Ni1ev2znlF2wnCrqD72iO1r9bx_SQc-8nqEYcInZxLSpDLaxkmAjfIin2QSh8oqfF2ta-iUYG9UEo1g6iZOheY9qN31MnXHK-zuXGZ6DDEPqFY9huCi3mst3FobijqyUtkFpk_mX81d6xKF-uPi9zXjyIWC8jHT3XpghGHG6tmUfrewI7KF2Fnzgk50ygGUt5F0_1hoNojZcyIzLij3Jh8TAQqo1H1e2-5rJ048F-KwPCPhkxGvJitrsO3o5K2yTJDtboKBaChbMmS09xw9AHYOqyi4StrT2brEEc0_ZE
+23:10:52.682 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 89 -- ResponseBody:{
+  "success": true,
+  "challenge_ts": "2017-06-24T22:10:33Z",
+  "hostname": "stest.com"
+}
+23:10:52.697 DEBUG o.c.s.impl.RegistrationServiceImpl.verifyRecaptcha 99 -- StatusCode:200,Message:200,{"hostname":"stest.com","success":true,"challenge_ts":"2017-06-24T22:10:33Z"},{}
+23:10:52.811 DEBUG org.cg.service.impl.UserServiceImpl.addUser 36 -- Create-userDTO:[ UserID:null, Username:nas, Roles:[Role: [id=null ,role=ROLE_USER ,date=Sat Jun 24 23:10:52 BST 2017]], Name:nas nas, email:test123@abv.bg, socialProvider:null, activated: false, contactPreference:email, emaiActive:false, hashKey:null]
+23:10:53.413 DEBUG org.cg.service.impl.UserServiceImpl.convertDtoIntoEntity 161 -- Adding role to user:Role: [id=null ,role=ROLE_USER ,date=Sat Jun 24 23:10:53 BST 2017]
+23:10:53.414 DEBUG org.cg.service.impl.UserServiceImpl.addUser 41 -- Creating user:User:[Userid=null, Username=nas ,role=[Role: [id=null ,role=ROLE_USER ,date=Sat Jun 24 23:10:53 BST 2017]] ,name=nas nas ,email=test123@abv.bg ,password=password ,activated=false ,contactPreference=email ,emailActive=false .hashKey=null]
