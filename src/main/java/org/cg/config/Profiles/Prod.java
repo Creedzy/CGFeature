@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 @Retention(RetentionPolicy.RUNTIME)
 @Profile("prod")
 @PropertySource(value = { "classpath:HibernateConfig.properties" })
-@EnableRdsInstance(dbInstanceIdentifier = "west-1-mcdb",password = "c3r3pr0c", readReplicaSupport = true)
+@EnableRdsInstance(dbInstanceIdentifier = "west-1-mcdb",password = "", readReplicaSupport = true)
 public @interface Prod {
 
 }
