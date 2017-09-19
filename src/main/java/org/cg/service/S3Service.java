@@ -1,7 +1,13 @@
 package org.cg.service;
 
+import java.util.List;
+
+import com.amazonaws.services.s3.model.Bucket;
 
 
-public class S3Service  {
 
+public interface S3Service  {
+
+    public List<Bucket> listBuckets();
+    
 }

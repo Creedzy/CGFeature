@@ -1,5 +1,6 @@
 package org.cg.config;
 
+import org.cg.service.S3Service;
 import org.cg.service.SESService;
 import org.cg.service.SQSService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
@@ -31,10 +34,10 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
 
 @Configuration
 @ComponentScan(
-                basePackageClasses = {SESService.class,SQSService.class,ConfigurationService.class}, 
+                basePackageClasses = {SESService.class,SQSService.class,S3Service.class,ConfigurationService.class}, 
                 useDefaultFilters = false,
                 includeFilters = {
-                    @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {SESService.class,SQSService.class,ConfigurationService.class})
+                    @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {SESService.class,SQSService.class,S3Service.class,ConfigurationService.class})
                 })
 @PropertySource(value = { "classpath:store.properties" })
 @ImportResource("classpath:awsconfig.xml")
@@ -76,6 +79,16 @@ public class AmazonConfigs {
    QueueMessagingTemplate queueMessagingTemplate(AmazonSQSAsync aMSQS) {
        QueueMessagingTemplate template = new QueueMessagingTemplate(aMSQS);
        return template;
+   }
+   
+   @Bean
+   AmazonS3 amazonS3(BasicAWSCredentials awsCredentials) {
+       AmazonS3 s3 = AmazonS3ClientBuilder
+                       .standard()
+                       .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+                       .withRegion(Regions.EU_WEST_1)
+                       .build();
+       return s3;
    }
     
    @Bean
