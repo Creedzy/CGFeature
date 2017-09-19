@@ -6,6 +6,8 @@ bin/
 /src/main/resources/store.properties
 /src/main/java/org/cg/config/Profiles/Prod.java
 /logs/
+logs/
+gradle/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
