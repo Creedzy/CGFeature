@@ -1,6 +1,10 @@
 .gradle
 /build/
 bin/
+/bin
+/src/main/resources/application.properties
+/src/main/resources/store.properties
+/src/main/java/org/cg/config/Profiles/Prod.java
 /logs/
 !gradle/wrapper/gradle-wrapper.jar
 

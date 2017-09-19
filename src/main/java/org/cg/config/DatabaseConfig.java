@@ -32,7 +32,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 @Configuration
-@ImportResource("classpath:awsconfig.xml")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"org.cg.repository"})
 @Prod

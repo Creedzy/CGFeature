@@ -51,6 +51,9 @@ public class ConfigurationService {
 	@Value("${redirect.url}")
 	String redirectUrl;
 	
+	@Value("${sesSenderEmail}")
+	String sesSenderEmail;
+	
 	public String getRedirectUrl() {
 		return redirectUrl;
 	}
@@ -154,5 +157,13 @@ public class ConfigurationService {
 	public void setRecaptchaSecret(String recaptchaSecret) {
 		this.recaptchaSecret = recaptchaSecret;
 	}
+
+    public String getSesSenderEmail() {
+        return sesSenderEmail;
+    }
+
+    public void setSesSenderEmail(String sesSenderEmail) {
+        this.sesSenderEmail = sesSenderEmail;
+    }
 	
 }

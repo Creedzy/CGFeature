@@ -1,8 +1,8 @@
 package org.cg.service;
 
 
-public class SESService {
+public interface SESService {
 	
-	
+	public void sendConfirmationEmail();
 
 }
