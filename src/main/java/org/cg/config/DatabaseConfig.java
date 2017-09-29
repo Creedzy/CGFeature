@@ -54,8 +54,6 @@ public class DatabaseConfig {
 
 		Properties props = new Properties();
 		props.setProperty("hibernate.format_sql", "true");
-
-		// Your turn ... configure the emf like the example in the slides ...
 		emf.setDataSource(dataSource);
 		emf.setJpaProperties(hibernateProperties());
 		emf.setJpaVendorAdapter(adapter);

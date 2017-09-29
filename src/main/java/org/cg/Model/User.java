@@ -43,7 +43,7 @@ public class User implements Serializable {
 	private boolean activated;
 	private String contactPreference;
 	private boolean emailActive;
-	private byte[] hashKey;
+	private String hashKey;
 	private SocialMediaService socialSignInProvider;
 	
 	
@@ -123,11 +123,11 @@ public Long getUserId() {
 		this.emailActive = emailActive;
 	}
 	
-	public byte[] getHashKey() {
+	public String getHashKey() {
 		return hashKey;
 	}
 
-	public void setHashKey(byte[] hashKey) {
+	public void setHashKey(String hashKey) {
 		this.hashKey = hashKey;
 	}
 

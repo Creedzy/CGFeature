@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
-public class MainController {
-	Logger logger = LoggerFactory.getLogger(MainController.class);
-	@Autowired
-	RegistrationService regService;
+public class DialogController {
+	Logger logger = LoggerFactory.getLogger(DialogController.class);
+
 
 	@RequestMapping("/")
 	public String index() {
@@ -41,7 +41,7 @@ public class MainController {
 	 @RequestMapping("/login")
 	    public String login() {
 	    	return "apps/login/index";
-	    }
+	 }
 	 
 	 @RequestMapping("/logout")
 	 public String logout(HttpServletRequest request,HttpServletResponse response) {
@@ -49,23 +49,11 @@ public class MainController {
 		session.invalidate();
 		logger.debug("Session ivalidated");
 		return "apps/login/index";
-	 }
+	 }	 
 	 
-
 	@RequestMapping("/register")
 	public String registrationPage() {
 		return "apps/registration/index";
-	}
-
-	@RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> registration(@RequestBody RegistrationDTO newUser) {
-
-		logger.debug("Reg user:{},resultt: {}", newUser);
-		if (!regService.verifyRecaptcha(newUser.getMyRecaptchaResponse())) {
-			return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
-		}
-		regService.registerUser(newUser);
-		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = { "/error" }, method = RequestMethod.GET)

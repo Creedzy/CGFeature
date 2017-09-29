@@ -10,4 +10,5 @@ public interface RegistrationService {
 	public UserDTO registerUser(RegistrationDTO user);
 	public RegistrationDTO registerSocialUser(RegistrationDTO user);
 	public Boolean verifyRecaptcha(String recaptcha);
+	public Boolean verifyActivationEmail(String hash,String email);
 }

@@ -1,5 +1,6 @@
-package org.cg.config;
+package testconfigs;
 
+import org.cg.config.ConfigurationService;
 import org.cg.service.S3Service;
 import org.cg.service.SESService;
 import org.cg.service.SQSService;
@@ -13,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -42,22 +42,20 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
-public class AmazonConfigs {
-    Logger logger = LoggerFactory.getLogger(AmazonConfigs.class);
+@ComponentScan(
+                basePackageClasses = {SESService.class,SQSService.class,S3Service.class,ConfigurationService.class}, 
+                useDefaultFilters = false,
+                includeFilters = {
+                    @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {SESService.class,SQSService.class,S3Service.class,ConfigurationService.class})
+                })
+@PropertySource(value = { "classpath:store.properties" })
+@ImportResource("classpath:awsconfig.xml")
+public class AmazonTestConfig {
+    Logger logger = LoggerFactory.getLogger(AmazonTestConfig.class);
     
+
     @Autowired
     ApplicationContext ctx;
-    
-    
-    @Bean
-    AmazonS3 amazonS3(BasicAWSCredentials awsCredentials) {
-        AmazonS3 s3 = AmazonS3ClientBuilder
-                        .standard()
-                        .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                        .withRegion(Regions.EU_WEST_1)
-                        .build();
-        return s3;
-    }    
     
     @Bean 
     JavaMailSender javaMailSender(AmazonSimpleEmailService aMSES) {
@@ -99,11 +97,20 @@ public class AmazonConfigs {
        return template;
    }
    
-
+   @Bean
+   AmazonS3 amazonS3(BasicAWSCredentials awsCredentials) {
+       AmazonS3 s3 = AmazonS3ClientBuilder
+                       .standard()
+                       .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+                       .withRegion(Regions.EU_WEST_1)
+                       .build();
+       return s3;
+   }   
     
    @Bean
-   BasicAWSCredentials awsCredentials(Environment env) {
-       BasicAWSCredentials auth = new BasicAWSCredentials(env.getProperty("access.key"), env.getProperty("secret.key"));
+   BasicAWSCredentials awsCredentials(ConfigurationService conf) {
+       logger.debug("keyhere:{},{}",conf.getAmazonAccessKey());
+       BasicAWSCredentials auth = new BasicAWSCredentials(conf.getAmazonAccessKey(), conf.getAmazonSecretKey());
        return auth;
    }
     

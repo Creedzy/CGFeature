@@ -8,8 +8,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 @Service
-@PropertySource(value={"classpath:store.properties"},
-ignoreResourceNotFound = true)
 public class ConfigurationService {
 	
 	@Value("${facebook.access.code.url}")
@@ -53,6 +51,15 @@ public class ConfigurationService {
 	
 	@Value("${sesSenderEmail}")
 	String sesSenderEmail;
+	
+	@Value("${encryption.key}")
+	String encryptionKey;
+	
+	@Value("${access.key}")
+	String amazonAccessKey;
+	
+	@Value("${secret.key}")
+	String amazonSecretKey;
 	
 	public String getRedirectUrl() {
 		return redirectUrl;
@@ -164,6 +171,30 @@ public class ConfigurationService {
 
     public void setSesSenderEmail(String sesSenderEmail) {
         this.sesSenderEmail = sesSenderEmail;
+    }
+
+    public String getEncryptionKey() {
+        return encryptionKey;
+    }
+
+    public void setEncryptionKey(String encryptionKey) {
+        this.encryptionKey = encryptionKey;
+    }
+
+    public String getAmazonAccessKey() {
+        return amazonAccessKey;
+    }
+
+    public void setAmazonAccessKey(String amazonAccessKey) {
+        this.amazonAccessKey = amazonAccessKey;
+    }
+
+    public String getAmazonSecretKey() {
+        return amazonSecretKey;
+    }
+
+    public void setAmazonSecretKey(String amazonSecretKey) {
+        this.amazonSecretKey = amazonSecretKey;
     }
 	
 }

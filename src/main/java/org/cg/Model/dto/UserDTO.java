@@ -19,7 +19,7 @@ public class UserDTO
 	private boolean activated;
 	private String contactPreference;
 	private boolean emailActive;
-	private byte[] hashKey;
+	private String hashKey;
 	private SocialMediaService socialProvider;
 	
 	@Override
@@ -114,12 +114,12 @@ public class UserDTO
 		return emailActive;
 	}
 
-	public void setHashKey(byte[] hashKey)
+	public void setHashKey(String hashKey)
 	{
 		this.hashKey = hashKey;
 	}
 
-	public byte[] getHashKey()
+	public String getHashKey()
 	{
 		return hashKey;
 	}

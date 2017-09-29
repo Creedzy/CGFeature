@@ -1,17 +1,26 @@
 package org.cg.service.impl;
 
+
+
+
+import org.cg.Model.SQS.AmazonSesComplaintNotification;
+import org.cg.Model.SQS.AmazonSqsNotification;
 import org.cg.service.SQSService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 
+
 @Service
 public class SQSServiceImpl implements SQSService {
-    
+    Logger logger = LoggerFactory.getLogger(SQSServiceImpl.class);
     private final QueueMessagingTemplate queueMessagingTemplate;
 
     @Autowired
@@ -20,14 +29,23 @@ public class SQSServiceImpl implements SQSService {
     }
     
     @Override
-    public void send() {
-        this.queueMessagingTemplate.send("ses-bounces-queue", MessageBuilder.withPayload("aa").build());
+    public void send(String queue,String payload) {
+        this.queueMessagingTemplate.send(queue, MessageBuilder.withPayload(payload).build());
     }
     
     @Override
-    public void getMessage() {
-        // TODO Auto-generated method stub
+    public AmazonSqsNotification checkBounceQueue() {
+        AmazonSqsNotification message = this.queueMessagingTemplate.receiveAndConvert("ses-bounces-queue", AmazonSqsNotification.class);
+        logger.debug("Messages:{}",message);
+        return message;
         
+    }
+    
+    @Override
+    public AmazonSesComplaintNotification checkComplaintQueue() {
+        AmazonSesComplaintNotification message = this.queueMessagingTemplate.receiveAndConvert("ses-complaints-queue", AmazonSesComplaintNotification.class);
+        logger.debug("Messages:{}",message);
+        return message;
     }
 
 }

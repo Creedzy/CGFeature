@@ -2,30 +2,30 @@ package org.cg.service.impl;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
+import java.util.StringJoiner;
 
-import org.cg.Model.Role;
-import org.cg.Model.User;
 import org.cg.Model.dto.RegistrationDTO;
 import org.cg.Model.dto.RoleDTO;
 import org.cg.Model.dto.UserDTO;
 import org.cg.config.ConfigurationService;
+import org.cg.service.EncryptionService;
 import org.cg.service.MasterRefService;
 import org.cg.service.RegistrationService;
+import org.cg.service.SESService;
 import org.cg.service.UserService;
+import org.cg.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import com.nimbusds.oauth2.sdk.token.AccessToken;
 
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -37,11 +37,22 @@ public class RegistrationServiceImpl implements RegistrationService{
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	EncryptionService encryptionService;
+	
+	@Autowired
+	SESService emailService;
+	
 	@Autowired
 	MasterRefService masterRefService;
+	
 	@Autowired
 	ConfigurationService config;
+	
 	RestTemplate client;
+	
+	Random random = new Random();
 	
 	@Override
 	public UserDTO registerUser(RegistrationDTO userReg) {
@@ -57,12 +68,19 @@ public class RegistrationServiceImpl implements RegistrationService{
 			user.setContactPreference("nomail");
 		}	
 		user.setUsername(userReg.getUsername());
-		user.setPassword(userReg.getPassword());
+		StringJoiner jr = new StringJoiner("");
+		jr.add(userReg.getEmail());
+		jr.add(userReg.getFirstName());
+		jr.add(userReg.getUsername());
+		user.setPassword(encryptionService.encodeHash(userReg.getPassword(), jr.toString()));
 		RoleDTO role = new RoleDTO();
 		role.setDate(new Date());
 		role.setRoleName("ROLE_USER");
-		user.setRoles(Arrays.asList(role));
+		user.setRoles(Arrays.asList(role));		
+		String hash = encryptionService.encryptPassword(StringUtils.randomString());
+		user.setHashKey(hash);
 		UserDTO registeredUser = userService.addUser(user);
+		emailService.sendConfirmationEmail(userReg.getEmail(), hash);
 		return registeredUser;
 		
 	}
@@ -99,5 +117,13 @@ public class RegistrationServiceImpl implements RegistrationService{
         logger.debug("StatusCode:{},Message:{},{},{}",response.getStatusCode(),response.getStatusCodeValue(),jsonObject);
         return Boolean.parseBoolean(jsonObject.getAsString("success"));
 	}
+
+    @Override
+    public Boolean verifyActivationEmail(String hash, String email) {
+        UserDTO user = userService.getUserByEmail(email);
+        if(!user.getHashKey().equals(hash)) 
+            return false;
+        return true;
+    }
 
 }

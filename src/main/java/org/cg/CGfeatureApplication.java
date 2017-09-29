@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
@@ -26,6 +28,11 @@ public class CGfeatureApplication extends SpringBootServletInitializer {
 	    }
 
 	    private static Class<CGfeatureApplication> applicationClass = CGfeatureApplication.class;
+	    
+	    @Bean
+	    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+	        return new PropertySourcesPlaceholderConfigurer();
+	    }
 }
 
 
