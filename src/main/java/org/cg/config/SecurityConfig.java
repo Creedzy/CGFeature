@@ -1,10 +1,14 @@
 package org.cg.config;
 
+import org.apache.http.client.RedirectStrategy;
 import org.cg.config.Profiles.Prod;
 import org.cg.repository.UserRepository;
 import org.cg.security.CustomAuthenticationFilter;
+import org.cg.security.CustomUsernamePasswordAuthenticationFilter;
 import org.cg.security.SocialSignInService;
+import org.cg.security.UsernamePasswordAuthenticationFailureHandler;
 import org.cg.security.UsernamePasswordAuthenticationProvider;
+import org.cg.security.UsernamePasswordAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +19,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 
@@ -34,26 +42,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	UserRepository userRepository;
 	
 	 @Bean
-	    protected AbstractAuthenticationProcessingFilter getAuthTokenFilter() throws Exception {
+	 protected AbstractAuthenticationProcessingFilter getAuthTokenFilter() throws Exception {
 
 	        //CustomAuthenticationFilter authFilter = new CustomAuthenticationFilter(new RegexRequestMatcher("^/"+properties.getApplicationName()+".*", null));
 	        CustomAuthenticationFilter authFilter = new CustomAuthenticationFilter("/auth");
 	        authFilter.setAuthenticationManager(authenticationManagerBean());
-
 	        return authFilter;
 	}
 	 
-	 
+	@Bean
+	AuthenticationSuccessHandler successHandler() {
+	    UsernamePasswordAuthenticationSuccessHandler handler = new UsernamePasswordAuthenticationSuccessHandler();
+	    DefaultRedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	    redirectStrategy.setContextRelative(true);
+	    handler.setRedirectStrategy(redirectStrategy);
+	    return handler;
+	}
+	
+	@Bean
+	AuthenticationFailureHandler failureHandler() {
+	    UsernamePasswordAuthenticationFailureHandler handler = new UsernamePasswordAuthenticationFailureHandler();
+	    return handler;
+	}
+	
+	@Bean
+	protected UsernamePasswordAuthenticationFilter usernamePasswordFilter() throws Exception {
+	    CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter();
+	    filter.setAuthenticationManager(authenticationManagerBean());
+	    filter.setAuthenticationSuccessHandler(successHandler());
+	    filter.setFilterProcessesUrl("/login/authenticate");
+	    filter.setAuthenticationFailureHandler(failureHandler());
+	    return filter;
+	}
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
         	.addFilterAfter(getAuthTokenFilter(), SecurityContextPersistenceFilter.class)
+        	.addFilterAt(usernamePasswordFilter(), UsernamePasswordAuthenticationFilter.class)
         	.csrf().disable()
              .formLogin()
              	.loginPage("/login")
-             	.loginProcessingUrl("/login/authenticate")
-             	.failureUrl("/login?error=bad_credentials")
              .and()
              	.logout()
              		.deleteCookies("JSESSIONID")
