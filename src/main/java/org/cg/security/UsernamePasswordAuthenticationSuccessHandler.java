@@ -44,7 +44,6 @@ public class UsernamePasswordAuthenticationSuccessHandler extends SimpleUrlAuthe
         String targetUrl = savedRequest.getRedirectUrl();
         logger.debug("Redirecting to DefaultSavedRequest Url: " + targetUrl);
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
-        
     }
     
     public void setRequestCache(RequestCache requestCache) {

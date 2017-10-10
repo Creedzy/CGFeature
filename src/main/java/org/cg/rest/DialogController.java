@@ -15,8 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +36,8 @@ import org.springframework.web.context.request.WebRequest;
 public class DialogController {
 	Logger logger = LoggerFactory.getLogger(DialogController.class);
 
-
+	
+	@CrossOrigin(origins = "http://stest.com:8080/")
 	@RequestMapping("/")
 	public String index() {
 
@@ -40,7 +46,13 @@ public class DialogController {
 	
 	 @RequestMapping("/login")
 	    public String login() {
-	    	return "apps/login/index";
+	         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	         logger.debug("security:{},{},{}",auth,auth.isAuthenticated(),auth.getClass());
+	         if(SecurityContextHolder.getContext().getAuthentication() == null || !SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+	                        || SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
+	             return "apps/login/index";
+	         }
+	         return "redirect:/";
 	 }
 	 
 	 @RequestMapping("/logout")
