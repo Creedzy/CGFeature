@@ -20,8 +20,19 @@ public class UsernamePasswordAuthenticationFailureHandler implements Authenticat
                     onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                     AuthenticationException exception) throws IOException, ServletException {
         AuthError error = new AuthError();
-        error.setError(HttpStatus.UNAUTHORIZED);
-        error.setDescription(exception.getMessage());
+        error.setStatus(HttpStatus.UNAUTHORIZED);
+      
+        switch(exception.getMessage()) {
+        case "user.not.found":
+            error.setErrorCode(exception.getMessage());
+            error.setDescription("Incorrect username or Password");
+        case "user.not.activated":
+            error.setErrorCode("user.not.activated");
+            error.setDescription("User is not activated");
+            default: 
+                error.setErrorCode("authentication.error");
+                error.setDescription("Failed to authenticate user");
+        }
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(error);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -33,19 +44,26 @@ public class UsernamePasswordAuthenticationFailureHandler implements Authenticat
 
 class AuthError {
 
-    HttpStatus error;
+    HttpStatus status;
+    String errorCode;
     String description;
     
-    public HttpStatus getError() {
-        return error;
+    public HttpStatus getStatus() {
+        return status;
     }
-    public void setError(HttpStatus error) {
-        this.error = error;
+    public void setStatus(HttpStatus error) {
+        this.status = error;
     }
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getErrorCode() {
+        return errorCode;
+    }
+    public void setErrorCode(String error) {
+        this.errorCode = error;
     }
 }

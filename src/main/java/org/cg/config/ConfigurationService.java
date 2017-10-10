@@ -55,10 +55,10 @@ public class ConfigurationService {
 	@Value("${encryption.key}")
 	String encryptionKey;
 	
-	@Value("${access.key}")
+	@Value("${AWS_ACCESS_KEY}")
 	String amazonAccessKey;
 	
-	@Value("${secret.key}")
+	@Value("${AWS_SECRET_KEY}")
 	String amazonSecretKey;
 	
 	public String getRedirectUrl() {

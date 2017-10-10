@@ -27,7 +27,7 @@
            
            <aws-context:context-credentials>
       		 <aws-context:instance-profile-credentials/>
-      		 <aws-context:simple-credentials access-key="${access.key}" secret-key="${secret.key}"/>
+      		 <aws-context:simple-credentials access-key="${AWS_ACCESS_KEY}" secret-key="${AWS_SECRET_KEY}"/>
   		   </aws-context:context-credentials>
   		   
 </beans>

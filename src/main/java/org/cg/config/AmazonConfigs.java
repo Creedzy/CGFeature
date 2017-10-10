@@ -103,7 +103,7 @@ public class AmazonConfigs {
     
    @Bean
    BasicAWSCredentials awsCredentials(Environment env) {
-       BasicAWSCredentials auth = new BasicAWSCredentials(env.getProperty("access.key"), env.getProperty("secret.key"));
+       BasicAWSCredentials auth = new BasicAWSCredentials(env.getProperty("AWS_ACCESS_KEY"), env.getProperty("AWS_SECRET_KEY"));
        return auth;
    }
     

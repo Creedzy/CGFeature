@@ -43,7 +43,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
             
             if (isPasswordValid(user, password)) {
                 if(!user.isActivated()) {
-                    throw new BadCredentialsException("User is not activated. An email has been sent to activate your account");
+                    throw new BadCredentialsException("user.not.activated");
                 }                
                 return new UsernamePasswordAuthenticationToken(username, password, resolveAuthorities(user));
             }
@@ -52,7 +52,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 
         }
         else {
-            throw new BadCredentialsException("User not found");
+            throw new BadCredentialsException("user.not.found");
         }
 
     }

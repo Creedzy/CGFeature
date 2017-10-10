@@ -14,6 +14,7 @@ import org.cg.service.MasterRefService;
 import org.cg.service.RegistrationService;
 import org.cg.service.SESService;
 import org.cg.service.UserService;
+import org.cg.service.Exception.RegistrationException;
 import org.cg.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,15 @@ public class RegistrationServiceImpl implements RegistrationService{
 	Random random = new Random();
 	
 	@Override
-	public UserDTO registerUser(RegistrationDTO userReg) {
+	public UserDTO registerUser(RegistrationDTO userReg) throws RegistrationException {
+	    //Check if the user is already registered and if it is using a social login provider
+        UserDTO checkUser = userService.getUserByEmail(userReg.getEmail());
+	    if(checkUserExists(checkUser)) {
+	        if(isSocialProviderUser(checkUser)) {
+	            throw new RegistrationException("social.user.exists");
+	        }
+	        throw new RegistrationException("user.exists");
+	    } 
 		UserDTO user = new UserDTO();
 		user.setName(userReg.getFirstName() + " " + userReg.getLastName());
 		user.setFirstName(userReg.getFirstName());
@@ -124,6 +133,18 @@ public class RegistrationServiceImpl implements RegistrationService{
         if(!user.getHashKey().equals(hash)) 
             return false;
         return true;
+    } 
+    
+    private Boolean checkUserExists(UserDTO user) {
+        if(user != null)
+            return true;
+        return false;
+    }
+    
+    private Boolean isSocialProviderUser(UserDTO user) {
+        if(user.getSocialProvider()!= null)
+            return true;
+        return false;
     }
 
 }

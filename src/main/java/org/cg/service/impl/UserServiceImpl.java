@@ -124,6 +124,9 @@ MasterRefRepository masterRefRepository;
 		if (user.getUserId() == null) {
 			user.setUserId(userEntity.getUserId());
 		}
+		if(userEntity.getSocialSignInProvider() != null) {
+		    user.setSocialProvider(userEntity.getSocialSignInProvider());
+		}
 		
 		if(userEntity.getRole() != null) {
 			List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
@@ -146,6 +149,9 @@ MasterRefRepository masterRefRepository;
 		User user = mapper.map(userDTO,User.class);
 		if (user.getUserId()==null){
 			user.setUserId(userDTO.getUserId());
+		}
+		if(userDTO.getSocialProvider() != null) {
+		    user.setSocialSignInProvider(userDTO.getSocialProvider());
 		}
 		
 		if(userDTO.getRoles() != null) {

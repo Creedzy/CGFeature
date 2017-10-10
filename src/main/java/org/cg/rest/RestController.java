@@ -2,6 +2,7 @@ package org.cg.rest;
 
 import org.cg.Model.dto.RegistrationDTO;
 import org.cg.service.RegistrationService;
+import org.cg.service.Exception.RegistrationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,17 @@ public class RestController {
     public ResponseEntity<String> registration(@RequestBody RegistrationDTO newUser) {
 
         logger.debug("Reg user:{},resultt: {}", newUser);
-        if (!regService.verifyRecaptcha(newUser.getMyRecaptchaResponse())) {
-            return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        try {
+            if (!regService.verifyRecaptcha(newUser.getMyRecaptchaResponse())) {
+                return new ResponseEntity<>("recaptcha.invalid", HttpStatus.BAD_REQUEST);
+            }
+            regService.registerUser(newUser);           
         }
-        regService.registerUser(newUser);
+        catch (RegistrationException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>("success", HttpStatus.OK);
+      
     }
     
     @RequestMapping(value = "/activation", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)

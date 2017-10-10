@@ -43,7 +43,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes={DatabaseConfig.class,ApplicationConfig.class,SecurityConfig.class})
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes={ApplicationConfig.class,DatabaseConfig.class,SecurityConfig.class})
 @ActiveProfiles("prod")
 public class TestServices {
 	

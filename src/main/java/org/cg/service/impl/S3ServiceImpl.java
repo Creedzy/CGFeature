@@ -20,5 +20,10 @@ public class S3ServiceImpl implements S3Service {
         List<Bucket> buckets = s3.listBuckets();
         return buckets;
     }
+    
+    public String uploadFile() {
+        
+        return null;       
+    }
 
 }
