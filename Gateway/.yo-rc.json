@@ -1,0 +1,38 @@
+{
+  "generator-a1ui": {
+    "promptValues": {
+      "username": "atanas.atanasov"
+    }
+  },
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.cg"
+    },
+    "jhipsterVersion": "4.9.0",
+    "baseName": "CGFeatureGateway",
+    "packageName": "org.cg",
+    "packageFolder": "org/cg",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "hibernateCache": "hazelcast",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "13af3e9b31fc1b34132e67b50cc0de00b791db59",
+    "clientFramework": "angularX",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "applicationType": "gateway",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "enableTranslation": false
+  }
+}

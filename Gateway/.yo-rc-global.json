@@ -1,0 +1,12 @@
+{
+  "generator-a1ui:0.1.10": {
+    "promptValues": {
+      "username": "atanas.atanasov"
+    }
+  },
+  "generator-jhipster:4.9.0": {
+    "promptValues": {
+      "packageName": "org.cg"
+    }
+  }
+}

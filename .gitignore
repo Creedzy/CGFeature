@@ -31,3 +31,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+store.properties
+Monolith/src/main/resources/application.properties
