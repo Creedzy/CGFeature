@@ -1,7 +1,7 @@
 package org.cg.web.rest;
 
 import io.github.jhipster.config.JHipsterProperties;
-import org.cg.CgFeatureGatewayApp;
+import org.cg.CgGatewayApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ProfileInfoResource
  **/
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CgFeatureGatewayApp.class)
+@SpringBootTest(classes = CgGatewayApp.class)
 public class ProfileInfoResourceIntTest {
 
     @Mock

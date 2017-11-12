@@ -1,7 +1,7 @@
 package org.cg.service;
 import org.cg.config.Constants;
 
-import org.cg.CgFeatureGatewayApp;
+import org.cg.CgGatewayApp;
 import org.cg.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.Before;
@@ -30,7 +30,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CgFeatureGatewayApp.class)
+@SpringBootTest(classes = CgGatewayApp.class)
 public class MailServiceIntTest {
 
     @Autowired

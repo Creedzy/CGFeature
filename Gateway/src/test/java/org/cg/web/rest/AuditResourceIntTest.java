@@ -1,6 +1,6 @@
 package org.cg.web.rest;
 
-import org.cg.CgFeatureGatewayApp;
+import org.cg.CgGatewayApp;
 import org.cg.config.audit.AuditEventConverter;
 import org.cg.domain.PersistentAuditEvent;
 import org.cg.repository.PersistenceAuditEventRepository;
@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see AuditResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CgFeatureGatewayApp.class)
+@SpringBootTest(classes = CgGatewayApp.class)
 @Transactional
 public class AuditResourceIntTest {
 

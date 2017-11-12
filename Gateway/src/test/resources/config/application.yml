@@ -17,19 +17,19 @@ eureka:
     client:
         enabled: true
     instance:
-        appname: CGFeatureGateway
-        instanceId: CGFeatureGateway:${spring.application.instance-id:${random.value}}
+        appname: CGGateway
+        instanceId: CGGateway:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: CGFeatureGateway
+        name: CGGateway
     jackson:
         serialization.write_dates_as_timestamps: false
     cache:
         type: none
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:CGFeatureGateway;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:CGGateway;DB_CLOSE_DELAY=-1
         name:
         username:
         password:
@@ -50,6 +50,13 @@ spring:
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
     data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                    logs: build/elasticsearch/log
+                    data: build/elasticsearch/data
     mail:
         host: localhost
     messages:
@@ -99,7 +106,7 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: 13af3e9b31fc1b34132e67b50cc0de00b791db59
+                secret: f2bd65553ae4648ac6b414a6c7eba7b447adbab1
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration

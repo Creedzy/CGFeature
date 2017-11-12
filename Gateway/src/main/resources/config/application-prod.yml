@@ -28,7 +28,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/CGFeatureGateway?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/CGGateway?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password:
         hikari:
@@ -47,9 +47,13 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-            hibernate.cache.hazelcast.instance_name: CGFeatureGateway
+            hibernate.cache.hazelcast.instance_name: CGGateway
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes: localhost:9300
     mail:
         host: localhost
         port: 25
@@ -69,7 +73,7 @@ liquibase:
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
-# keytool -genkey -alias CGFeatureGateway -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias CGGateway -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
@@ -82,7 +86,7 @@ liquibase:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
 #        keyStoreType: PKCS12
-#        keyAlias: CGFeatureGateway
+#        keyAlias: CGGateway
 # ===================================================================
 server:
     port: 8080
@@ -114,12 +118,12 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: 13af3e9b31fc1b34132e67b50cc0de00b791db59
+                secret: f2bd65553ae4648ac6b414a6c7eba7b447adbab1
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: CGFeatureGateway@localhost
+        from: CGGateway@localhost
         base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
@@ -127,7 +131,7 @@ jhipster:
             enabled: false
             host: localhost
             port: 2003
-            prefix: CGFeatureGateway
+            prefix: CGGateway
         prometheus:
             enabled: false
             endpoint: /prometheusMetrics

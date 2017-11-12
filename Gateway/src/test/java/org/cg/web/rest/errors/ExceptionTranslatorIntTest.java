@@ -1,6 +1,6 @@
 package org.cg.web.rest.errors;
 
-import org.cg.CgFeatureGatewayApp;
+import org.cg.CgGatewayApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CgFeatureGatewayApp.class)
+@SpringBootTest(classes = CgGatewayApp.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired
@@ -109,6 +109,16 @@ public class ExceptionTranslatorIntTest {
             .andExpect(content().contentType(MediaTypes.PROBLEM))
             .andExpect(jsonPath("$.message").value("error.http.403"))
             .andExpect(jsonPath("$.detail").value("test access denied!"));
+    }
+
+    @Test
+    public void testUnauthorized() throws Exception {
+        mockMvc.perform(get("/test/unauthorized"))
+            .andExpect(status().isUnauthorized())
+            .andExpect(content().contentType(MediaTypes.PROBLEM))
+            .andExpect(jsonPath("$.message").value("error.http.401"))
+            .andExpect(jsonPath("$.path").value("/test/unauthorized"))
+            .andExpect(jsonPath("$.detail").value("test authentication failed!"));
     }
 
     @Test

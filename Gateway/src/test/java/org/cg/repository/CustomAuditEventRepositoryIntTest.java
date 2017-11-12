@@ -1,6 +1,6 @@
 package org.cg.repository;
 
-import org.cg.CgFeatureGatewayApp;
+import org.cg.CgGatewayApp;
 import org.cg.config.Constants;
 import org.cg.config.audit.AuditEventConverter;
 import org.cg.domain.PersistentAuditEvent;
@@ -32,7 +32,7 @@ import static org.cg.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX
  * @see CustomAuditEventRepository
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CgFeatureGatewayApp.class)
+@SpringBootTest(classes = CgGatewayApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIntTest {
 
@@ -170,7 +170,6 @@ public class CustomAuditEventRepositoryIntTest {
         assertThat(persistentAuditEvent.getAuditEventDate()).isEqualTo(event.getTimestamp().toInstant());
     }
 
- 
     @Test
     public void addAuditEventTruncateLargeData() {
         Map<String, Object> data = new HashMap<>();
