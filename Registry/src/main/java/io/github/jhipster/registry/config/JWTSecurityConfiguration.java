@@ -5,6 +5,7 @@ import io.github.jhipster.registry.security.Http401UnauthorizedEntryPoint;
 import io.github.jhipster.registry.security.jwt.JWTConfigurer;
 import io.github.jhipster.registry.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,13 +17,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@Profile("!" + Constants.PROFILE_OAUTH2)
+public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
     private final TokenProvider tokenProvider;
 
-    public SecurityConfiguration(Http401UnauthorizedEntryPoint authenticationEntryPoint,
+    public JWTSecurityConfiguration(Http401UnauthorizedEntryPoint authenticationEntryPoint,
                                  TokenProvider tokenProvider) {
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.tokenProvider = tokenProvider;
@@ -33,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/app/**/*.{js,html}")
+            .antMatchers("/swagger-ui/**")
             .antMatchers("/content/**");
     }
 
@@ -58,8 +61,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/eureka/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/config/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/profile-info").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/v2/api-docs/**").permitAll()
+            .antMatchers("/swagger-resources/configuration/**").permitAll()
+            .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/*").permitAll()
             .anyRequest().authenticated()
         .and()
