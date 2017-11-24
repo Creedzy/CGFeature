@@ -4,14 +4,14 @@
       "packageName": "org.cg",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "4.10.2",
+    "jhipsterVersion": "4.9.0",
     "baseName": "CGGateway",
     "packageName": "org.cg",
     "packageFolder": "org/cg",
     "serverPort": "8080",
     "authenticationType": "jwt",
     "hibernateCache": "hazelcast",
-    "clusteredHttpSession": false,
+    "clusteredHttpSession": "hazelcast",
     "websocket": "spring-websocket",
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
@@ -21,24 +21,25 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "gradle",
     "enableSocialSignIn": false,
-    "enableSwaggerCodegen": false,
-    "jwtSecretKey": "f2bd65553ae4648ac6b414a6c7eba7b447adbab1",
-    "clientFramework": "angular1",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "02494e7c64159e9f1b2761bfdeaeff61413d6ec4",
+    "clientFramework": "angularX",
     "useSass": false,
-    "clientPackageManager": "npm",
+    "clientPackageManager": "yarn",
     "applicationType": "gateway",
-    "testFrameworks": [
-      "protractor"
-    ],
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
+    "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": [
       "en",
-      "da",
-      "nl",
       "fr",
-      "de"
+      "de",
+      "it",
+      "pl",
+      "ru",
+      "sv"
     ]
   }
 }

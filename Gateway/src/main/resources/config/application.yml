@@ -80,6 +80,7 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+
 security:
     basic:
         enabled: false
@@ -137,4 +138,35 @@ jhipster:
 # http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
+cloud:
+    aws:
+      region:
+           auto: false
+           static: eu-west-1
+      credentials:
+           access-key: 
+           secret-key: 
 application:
+     google:
+        id: 
+        secret:
+        access-code-url: 
+        token-url: 
+        user-info-url: 
+        
+     facebook:
+        id: 
+        secret: 
+        access-code-url: 
+        token-url: 
+        graph-url: 
+     recaptcha:
+        verification-url: 
+        secret: 
+     aws:
+        access-key: 
+        secret-key: 
+        ses-sender-mail: 
+     general:
+        encryption-key: 
+        oauth-redirect-url: 

@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
+        classpath "gradle.plugin.org.detoeuf:swagger-codegen-plugin:1.7.4"
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
     }
 }
@@ -23,6 +24,7 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 apply plugin: 'maven'
@@ -30,9 +32,20 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'propdeps'
 apply plugin: 'com.moowork.node'
-apply plugin: 'com.moowork.gulp'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
+
+idea {
+    module {
+        downloadJavadoc = true
+    }
+}
+
+eclipse {
+    classpath {
+        downloadJavadoc = true      
+    }
+}
 dependencyManagement {
   imports {
     mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + spring_cloud_version
@@ -87,7 +100,8 @@ if (OperatingSystem.current().isWindows()) {
 }
 
 test {
-    exclude '**/CucumberTest*'
+    include '**/*UnitTest*'
+    include '**/*IntTest*'
 
     // uncomment if the tests reports are not generated
     // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
@@ -100,12 +114,11 @@ task testReport(type: TestReport) {
     reportOn test
 }
 
-
-apply from: 'gradle/yeoman.gradle'
 apply from: 'gradle/docker.gradle'
 apply from: 'gradle/sonar.gradle'
 apply from: 'gradle/liquibase.gradle'
 apply from: 'gradle/mapstruct.gradle'
+apply from: 'gradle/swagger.gradle'
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty('prod')) {
@@ -158,6 +171,7 @@ dependencies {
     compile "com.hazelcast:hazelcast"
     compile "com.hazelcast:hazelcast-hibernate52:${hazelcast_hibernate52_version}"
     compile "com.hazelcast:hazelcast-spring"
+    compile "com.hazelcast:hazelcast-wm:${hazelcast_wm_version}"
     compile "javax.cache:cache-api"
     compile "org.hibernate:hibernate-core:${hibernate_version}"
     compile ("com.zaxxer:HikariCP:${hikaricp_version}")
@@ -179,6 +193,12 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-aop"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-data-elasticsearch"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '1.1.1.RELEASE'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.11.235'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-context', version: '1.1.1.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-jdbc', version: '1.1.1.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-core', version: '1.2.1.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-messaging', version: '1.2.1.RELEASE'
     // needed to get around elasticsearch stacktrace about jna not found
     // https://github.com/elastic/elasticsearch/issues/13245
     compile "net.java.dev.jna:jna"
@@ -186,10 +206,14 @@ dependencies {
     compile ("org.springframework.boot:spring-boot-starter-web") {
         exclude module: 'spring-boot-starter-tomcat'
     }
+
     compile "org.springframework.boot:spring-boot-starter-undertow"
     compile "org.springframework.boot:spring-boot-starter-websocket"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.zalando:problem-spring-web:${problem_spring_web_version}"
+    compile "com.google.guava:guava:18.0"
+    compile "com.datastax.cassandra:cassandra-driver-extras:" + dependencyManagement.managedVersions["com.datastax.cassandra:cassandra-driver-core"]
+    compile "com.datastax.cassandra:cassandra-driver-mapping"
     compile "org.springframework.cloud:spring-cloud-starter-zuul"
     compile "com.github.vladimir-bukhtoyarov:bucket4j-core:${bucket4j_version}"
     compile "com.github.vladimir-bukhtoyarov:bucket4j-jcache:${bucket4j_version}"
@@ -233,12 +257,16 @@ dependencies {
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
+clean {
+    delete "target"
+}
+
 task cleanResources(type: Delete) {
     delete 'build/resources'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.2.1'
+    gradleVersion = '4.1'
 }
 
 task stage(dependsOn: 'bootRepackage') {
