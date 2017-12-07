@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aws-context="http://www.springframework.org/schema/cloud/aws/context"
+       xmlns:jdbc="http://www.springframework.org/schema/cloud/aws/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"	
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context           
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/cloud/aws/context
+        http://www.springframework.org/schema/cloud/aws/context/spring-cloud-aws-context-1.0.xsd
+        http://www.springframework.org/schema/cloud/aws/jdbc
+        http://www.springframework.org/schema/cloud/aws/jdbc/spring-cloud-aws-jdbc.xsd">
+        
+		
+	
+    
+  <bean id="properties"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 
+    <property name="location" value="classpath:store.properties" />
+ 
+</bean>
+    
+           <aws-context:context-region region="eu-west-1"/>
+           
+           <aws-context:context-credentials>
+      		 <aws-context:instance-profile-credentials/>
+      		 <aws-context:simple-credentials access-key="${AWS_ACCESS_KEY}" secret-key="${AWS_SECRET_KEY}"/>
+  		   </aws-context:context-credentials>
+  		   
+</beans>

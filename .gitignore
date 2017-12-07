@@ -1,0 +1,35 @@
+.gradle
+/build/
+bin/
+/bin
+/src/main/resources/application.properties
+/src/main/resources/store.properties
+/src/main/java/org/cg/config/Profiles/Prod.java
+/logs/
+logs/
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+store.properties
+Monolith/src/main/resources/application.properties
