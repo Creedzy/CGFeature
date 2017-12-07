@@ -1,1 +1,1 @@
-include 'Gateway','Monolith','Registry','CGCommonComponents'
+include 'Gateway','AmazonServices','Registry','CGCommonComponents'
