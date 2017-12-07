@@ -54,6 +54,12 @@ hystrix:
                     thread:
                         timeoutInMilliseconds: 10000
 
+logging:
+    level:
+        ROOT: #logback.loglevel#
+        org.cg: #logback.loglevel#
+        io.github.jhipster: #logback.loglevel#
+
 management:
     security:
         roles: ADMIN
@@ -80,7 +86,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
-
 security:
     basic:
         enabled: false
