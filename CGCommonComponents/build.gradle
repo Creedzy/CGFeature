@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.6'
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 	
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
