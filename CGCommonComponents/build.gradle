@@ -22,7 +22,12 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:21.0'
-
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.3'
+	implementation 'joda-time:joda-time:2.2'
+	implementation 'org.apache.commons:commons-lang3:3.6'
+	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+	
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

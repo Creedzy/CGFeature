@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "org.cg"
     },
-    "jhipsterVersion": "4.9.0",
+    "jhipsterVersion": "4.10.2",
     "baseName": "AmazonServices",
     "packageName": "org.cg",
     "packageFolder": "org/cg",
@@ -21,13 +21,13 @@
     "buildTool": "gradle",
     "enableSocialSignIn": false,
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "76317104eee9b1444d3d8de4fcdd642128685a43",
+    "jwtSecretKey": "d6764984ac80540b90e1de47a5055de48f3bc758",
     "enableTranslation": false,
     "applicationType": "microservice",
     "testFrameworks": [],
     "jhiPrefix": "jhi",
+    "clientPackageManager": "yarn",
     "skipClient": true,
-    "skipUserManagement": true,
-    "clientPackageManager": "yarn"
+    "skipUserManagement": true
   }
 }

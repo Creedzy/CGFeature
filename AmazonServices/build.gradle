@@ -16,7 +16,7 @@ buildscript {
 
 plugins {
     id "org.sonarqube" version "2.5"
-    id "net.ltgt.apt" version "0.11"
+    id "net.ltgt.apt" version "0.13"
     id "io.spring.dependency-management" version "1.0.3.RELEASE"
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
@@ -25,6 +25,7 @@ apply plugin: 'java'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 apply plugin: 'maven'
+apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'propdeps'
@@ -84,8 +85,7 @@ if (OperatingSystem.current().isWindows()) {
 }
 
 test {
-    include '**/*UnitTest*'
-    include '**/*IntTest*'
+    exclude '**/CucumberTest*'
 
     // uncomment if the tests reports are not generated
     // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
@@ -97,6 +97,7 @@ task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/tests")
     reportOn test
 }
+
 
 apply from: 'gradle/docker.gradle'
 apply from: 'gradle/sonar.gradle'
@@ -136,6 +137,7 @@ repositories {
 }
 
 dependencies {
+	compile project(':CGCommonComponents')
     compile "io.github.jhipster:jhipster:${jhipster_server_version}"
     compile "io.dropwizard.metrics:metrics-core:${dropwizard_metrics_version}"
     compile "io.dropwizard.metrics:metrics-jvm:${dropwizard_metrics_version}"
@@ -189,6 +191,13 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-spectator"
     compile "org.springframework.retry:spring-retry"
     compile "org.springframework.cloud:spring-cloud-starter-eureka"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '1.1.1.RELEASE'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.11.235'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-context', version: '1.1.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-jdbc', version: '1.1.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-core', version: '1.2.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-messaging', version: '1.2.1.RELEASE'
+    
     compile "org.springframework.cloud:spring-cloud-starter-config"
     compile "org.springframework.cloud:spring-cloud-starter-feign"
     compile "org.springframework.boot:spring-boot-starter-cloud-connectors"
@@ -222,16 +231,12 @@ dependencies {
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
-clean {
-    delete "target"
-}
-
 task cleanResources(type: Delete) {
     delete 'build/resources'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.1'
+    gradleVersion = '4.2.1'
 }
 
 task stage(dependsOn: 'bootRepackage') {

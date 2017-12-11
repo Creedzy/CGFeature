@@ -24,8 +24,8 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
     instance:
-        appname: AmazonServices
-        instanceId: AmazonServices:${spring.application.instance-id:${random.value}}
+        appname: CGGateway
+        instanceId: CGGateway:${spring.application.instance-id:${random.value}}
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.context-path}/info
@@ -37,14 +37,22 @@ eureka:
 ribbon:
     eureka:
         enabled: true
+# See http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
+zuul: # those values must be configured depending on the application specific needs
+    host:
+        max-total-connections: 1000
+        max-per-route-connections: 100
+    semaphore:
+        max-semaphores: 500
+
 # See https://github.com/Netflix/Hystrix/wiki/Configuration
-#hystrix:
-#    command:
-#        default:
-#            execution:
-#                isolation:
-#                    thread:
-#                        timeoutInMilliseconds: 10000
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 10000
 
 management:
     security:
@@ -55,7 +63,7 @@ management:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
-        name: AmazonServices
+        name: CGGateway
     jackson:
         serialization.write_dates_as_timestamps: false
     jpa:
@@ -106,11 +114,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: AmazonServices@localhost
+        from: CGGateway@localhost
     swagger:
         default-include-pattern: /api/.*
-        title: AmazonServices API
-        description: AmazonServices API documentation
+        title: CGGateway API
+        description: CGGateway API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:
@@ -131,3 +139,26 @@ jhipster:
 # ===================================================================
 
 application:
+     google:
+        id: 651494547173-ja8ergf4jv1h27gddv4j6t86ma8pjpcb.apps.googleusercontent.com
+        secret: sG18OsbdWlAh6YPDZnkfflaL
+        access-code-url: https://accounts.google.com/o/oauth2/v2/auth
+        token-url: https://www.googleapis.com/oauth2/v4/token
+        user-info-url: https://www.googleapis.com/userinfo/v2/me
+        
+     facebook:
+        id: 1873700759576423
+        secret: 99f9590bc379037521b2b3f1f5ab4cb4
+        access-code-url: https://www.facebook.com/v2.9/dialog/oauth
+        token-url: https://graph.facebook.com/v2.9/oauth/access_token
+        graph-url: https://graph.facebook.com
+     recaptcha:
+        verification-url: https://www.google.com/recaptcha/api/siteverify
+        secret: 6LfOiiYUAAAAALMRo8igidZpLFnD1_0PI0Uv2sAk
+     aws:
+        access-key: AKIAJ2EISJRWZZC32J4Q
+        secret-key: 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
+        ses-sender-mail: admin@cgrepository.co.uk
+     general:
+        encryption-key: 1D3DCDB79FE2C0F18FB1BB901441B05E
+        oauth-redirect-url: http://stest.com:8080/auth
